@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>{%  block title%}{% endblock%}</title>
+   
+    {%block css%}{% endblock%}
+   
+</head>
+<body>
+
+	<header>
+		<a href="/" class="logo">V.N.C.</a>
+		<div class="menu-toggle"></div>
+		
+		<nav>
+			<ul>
+				<li><a href="#" class="active">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Team</a></li>
+				<li><a href="#">Portfolio</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+		<div class="clearfix"></div>
+	</header>
+	<div class="main bg-info">
+		
+		<div class="left-sidebar">
+			<ul>
+				<li>
+					<a href="/load_form">Add New Employee</a>
+				</li>
+				<li>
+					<a href="/show">Show All Employee</a>
+				</li>
+				<li>
+					<a href="/delete">Delete Employee</a>
+				</li>
+				<li>
+					<a href="#">Update Employee</a>
+				</li>
+			</ul>
+		</div>
+		<div class="main-contain ">
+			
+            {%block body%}{% endblock%}
+        </div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="footer">
+
+	</div>
+	<script src="{% static 'js/jquery1.js'%}"></script>
+	<script>
+		$(document).ready(function(){
+			$('.menu-toggle').click(function(){
+				$('.menu-toggle').toggleClass('active')
+				$('nav').toggleClass('active')
+			})
+		})
+ 	</script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    {% block script%}{% endblock%}
+</body>
+</html>

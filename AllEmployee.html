@@ -1,0 +1,84 @@
+{% extends 'basic.html'%}
+
+<!-- title -->
+{%  block title%}All Employees{% endblock%}
+
+<!-- style -->
+ {%block css%}
+    <style>
+       
+    </style>
+ {% endblock%}
+
+ <!-- body -->
+{%block body%}
+<div class="float-right">
+    <form action="/search" method="POST" class="form-inline" onsubmit="return myfun()">
+    {% csrf_token %}
+    <div class="form-group mx-sm-3  mb-2">
+            <input type="text" id="e_name" name="name" class="form-control">    
+            <div class="invalid-feedback" id="invalid01">
+                please enter Employee name.
+            </div>       
+    </div>  
+    <input type="submit" value="Search" class="btn btn-info mb-2">  
+</form>
+</div>
+<div class="table-responsive">
+<table class="table table-border">
+    
+    <tr class="" style="background: teal; color:white;">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Action</th>
+        <th>Action</th>
+    </tr>
+
+    {% for i in employee%}
+    <tr>
+        <td>{{i.eid}}</td>
+        <td>{{i.ename}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.econtact}}</td>
+        <td><a href="/edit/{{i.id}}">Edit</a></td>
+        <td><a href="/delete/{{i.id}}" onclick=" return isDelete()">Delete</a></td>
+    </tr>
+    {%endfor%}
+</table>
+</div>
+{% endblock%}
+
+<!-- script -->
+{% block script%}
+<script>
+    var name=document.getElementById("e_name").trim();
+    var name_error = document.getElementById("invalid01");
+    name_error.classList.add("d-none");
+    function myfun(){
+        if(name === ""){
+            name.classList.add('is-invalid');
+            name_error.classList.remove("d-none");
+            return false;
+        }
+        else{
+            name.classList.remove('is-invalid');
+            name_error.classList.add("d-none");
+            return true;
+        }
+    }
+    
+    function isDelete(){
+        var v=confirm("Are you sure  You wants to Delete?");
+        if(v){
+            return true;
+
+        }
+        else{
+            return false;
+        }
+
+    }
+</script>
+{% endblock%}
